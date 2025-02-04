@@ -1,27 +1,27 @@
 import { Chatbot } from "./lib/Chatbot";
+import { MessageHandler } from "./lib/Message";
 
 const chatbot = new Chatbot();
 
-chatbot.reiciveMessageHandler({
-  from: "75991458752",
-  body: "Hello World!",
-  timestamp: Date.now(),
-});
+Promise.all([
+  chatbot.reiciveMessageHandler({
+    from: "75991458752",
+    body: "Hello World!",
+  }),
 
-chatbot.reiciveMessageHandler({
-  from: "75991458752",
-  body: "Tudo bom?",
-  timestamp: Date.now(),
-});
+  chatbot.reiciveMessageHandler({
+    from: "75991458752",
+    body: "Tudo bom?",
+  }),
 
-chatbot.reiciveMessageHandler({
-  from: "75991458753",
-  body: "Oi",
-  timestamp: Date.now(),
-});
+  chatbot.reiciveMessageHandler({
+    from: "75991458753",
+    body: "Oi",
+  }),
+  chatbot.reiciveMessageHandler({
+    from: "75991458752",
+    body: "Tudo?",
+  }),
+]);
 
-chatbot.reiciveMessageHandler({
-  from: "75991458752",
-  body: "Tudo?",
-  timestamp: Date.now(),
-});
+console.log(MessageHandler.getLastMessageFrom("75991458752"));

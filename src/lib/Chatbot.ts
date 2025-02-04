@@ -1,15 +1,16 @@
-import { Message, MessageHandler } from "../lib/Message";
+import { MessageHandler } from "../lib/Message";
 
 export class Chatbot {
-  reiciveMessageHandler(_message: Message) {
+  async reiciveMessageHandler(_message: { from: any; body: any }) {
     const message = _message.body.trim().toLowerCase();
     const from = _message.from;
+    const timestamp = Date.now();
 
-    MessageHandler.save({
+    await MessageHandler.save({
       from: _message.from,
       body: _message.body,
-      timestamp: _message.timestamp,
+      timestamp: timestamp,
     });
-    MessageHandler.isNewFrom(from);
+    await MessageHandler.isNewFrom(from);
   }
 }
